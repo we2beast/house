@@ -2,12 +2,11 @@ package com.lab.house.hcs.vo.contract
 
 import com.lab.house.hcs.entities.Contract
 import com.lab.house.hcs.entities.House
-import java.sql.Timestamp
 
 data class ContractVO(
         val id: Long? = null,
-        val createdAt: Timestamp = Timestamp(0),
-        val updatedAt: Timestamp = Timestamp(0),
+        val createdAt: String,
+        val updatedAt: String,
         val billNumber: Int? = 0,
         val house: House? = null
 ) {
@@ -16,8 +15,8 @@ data class ContractVO(
         fun fromData(contract: Contract): ContractVO =
                 ContractVO(
                         contract.id,
-                        contract.createdAt,
-                        contract.updatedAt,
+                        contract.createdAt.toString(),
+                        contract.updatedAt.toString(),
                         contract.billNumber,
                         contract.house
                 )

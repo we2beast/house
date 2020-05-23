@@ -6,8 +6,8 @@ import java.sql.Timestamp
 
 data class HouseVO(
         val id: Long? = null,
-        val createdAt: Timestamp = Timestamp(0),
-        val updatedAt: Timestamp = Timestamp(0),
+        val createdAt: String,
+        val updatedAt: String,
         val houseNumber: Int? = 0,
         val contract: Contract? = null
 ) {
@@ -16,8 +16,8 @@ data class HouseVO(
         fun fromData(house: House): HouseVO =
                 HouseVO(
                         house.id,
-                        house.createdAt,
-                        house.updatedAt,
+                        house.createdAt.toString(),
+                        house.updatedAt.toString(),
                         house.houseNumber,
                         house.contract
                 )

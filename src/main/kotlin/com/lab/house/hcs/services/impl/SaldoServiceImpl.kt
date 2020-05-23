@@ -1,12 +1,12 @@
 package com.lab.house.hcs.services.impl
 
-import com.lab.house.hcs.services.Saldo
+import com.lab.house.hcs.services.SaldoService
 import com.lab.house.hcs.vo.hcs.HcsCreateRq
 import com.lab.house.hcs.vo.hcs.HcsVO
 import org.springframework.stereotype.Service
 
 @Service
-class SaldoImpl : Saldo {
+class SaldoServiceImpl : SaldoService {
     override fun getSaldoById(id: String): HcsVO {
         TODO("Not yet implemented")
     }

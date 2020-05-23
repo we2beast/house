@@ -4,7 +4,7 @@ import com.lab.house.core.exceptions.EntityNotFoundException
 import com.lab.house.hcs.vo.hcs.HcsCreateRq
 import com.lab.house.hcs.vo.hcs.HcsVO
 
-interface Saldo {
+interface SaldoService {
 
     @Throws(EntityNotFoundException::class)
     fun getSaldoById(id: String): HcsVO

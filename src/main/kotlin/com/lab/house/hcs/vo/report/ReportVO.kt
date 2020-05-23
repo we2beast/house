@@ -12,8 +12,8 @@ import javax.persistence.OneToOne
 
 data class ReportVO(
         val id: Long? = null,
-        val createdAt: Timestamp = Timestamp(0),
-        val updatedAt: Timestamp = Timestamp(0),
+        val createdAt: String,
+        val updatedAt: String,
         val saldos: MutableSet<Saldo> = mutableSetOf(),
         val charges: MutableSet<Charge> = mutableSetOf(),
         val payments: MutableSet<Payment> = mutableSetOf()
@@ -23,8 +23,8 @@ data class ReportVO(
                 fun fromData(report: Report): ReportVO =
                         ReportVO(
                                 report.id,
-                                report.createdAt,
-                                report.updatedAt,
+                                report.createdAt.toString(),
+                                report.updatedAt.toString(),
                                 report.saldos,
                                 report.charges,
                                 report.payments
