@@ -26,7 +26,6 @@ class ContractServiceImpl : ContractService {
         return contractRepository.findAll().map(::toContractVO)
     }
 
-    @Throws(EntityNotFoundException::class)
     override fun createContract(contractCreateRq: ContractCreateRq): ContractVO {
         val id = contractRepository.save(Contract().apply {
             billNumber = contractCreateRq.billNumber
@@ -38,12 +37,17 @@ class ContractServiceImpl : ContractService {
 
     @Throws(EntityNotFoundException::class)
     override fun updateContract(id: String, contractCreateRq: ContractCreateRq): ContractVO {
-        TODO("Not yet implemented")
+        contractRepository.save(contractRepository.findById(id.toLong()).get().apply {
+            billNumber = contractCreateRq.billNumber
+        }).id ?: throw IllegalArgumentException("Bad id returned.")
+
+        log.debug("Updated entity $id")
+        return getContractById(id)
     }
 
-    @Throws(EntityNotFoundException::class)
     override fun delete(id: String) {
-        TODO("Not yet implemented")
+        contractRepository.deleteById(id.toLong())
+        log.debug("Deleted entity $id")
     }
 
     private fun toContractVO(contract: Contract): ContractVO {
