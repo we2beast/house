@@ -12,18 +12,19 @@ data class Contract(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @SequenceGenerator(name = "sequenceGenerator")
-        val id: Long? = null,
+        var id: Long? = null,
 
         @CreationTimestamp
-        val createdAt: Timestamp = Timestamp(0),
+        var createdAt: Timestamp = Timestamp(0),
 
         @UpdateTimestamp
-        val updatedAt: Timestamp = Timestamp(0),
+        var updatedAt: Timestamp = Timestamp(0),
 
         @Column(name = "bill_number")
-        val billNumber: Int? = 0,
+        var billNumber: Int? = 0,
 
-        @OneToOne(mappedBy = "house", fetch = FetchType.LAZY, orphanRemoval = true, cascade = [CascadeType.ALL])
-        val house: House? = null
+        @OneToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name = "house_id")
+        var house: House? = null
 
 )

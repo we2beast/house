@@ -12,22 +12,26 @@ data class Payment(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @SequenceGenerator(name = "sequenceGenerator")
-        val id: Long? = null,
+        var id: Long? = null,
 
         @CreationTimestamp
-        val createdAt: Timestamp = Timestamp(0),
+        var createdAt: Timestamp = Timestamp(0),
 
         @UpdateTimestamp
-        val updatedAt: Timestamp = Timestamp(0),
+        var updatedAt: Timestamp = Timestamp(0),
 
         @Column(name = "value", nullable = false)
-        val value: Double? = 0.0,
+        var value: Double? = 0.0,
 
         @Column(name = "year", nullable = false)
-        val year: Int? = 1970,
+        var year: Int? = 1970,
 
         @Enumerated(EnumType.STRING)
         @Column(name = "month", nullable = false)
-        val month: Month = Month.JANUARY
+        var month: Month = Month.JANUARY,
+
+        @ManyToOne(fetch = FetchType.LAZY, optional = false)
+        @JoinColumn(name = "report_id", nullable = false)
+        val report: Report
 
 )

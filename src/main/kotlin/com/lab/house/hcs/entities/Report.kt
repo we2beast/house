@@ -12,21 +12,21 @@ data class Report(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @SequenceGenerator(name = "sequenceGenerator")
-        val id: Long? = null,
+        var id: Long? = null,
 
         @CreationTimestamp
-        val createdAt: Timestamp = Timestamp(0),
+        var createdAt: Timestamp = Timestamp(0),
 
         @UpdateTimestamp
-        val updatedAt: Timestamp = Timestamp(0),
+        var updatedAt: Timestamp = Timestamp(0),
 
-        @OneToMany(mappedBy = "saldos", fetch = FetchType.LAZY, orphanRemoval = true, cascade = [CascadeType.ALL])
-        val saldos: MutableSet<Saldo> = mutableSetOf(),
+        @OneToMany(mappedBy = "report", fetch = FetchType.LAZY, orphanRemoval = true, cascade = [CascadeType.ALL])
+        var saldos: MutableSet<Saldo> = mutableSetOf(),
 
-        @OneToMany(mappedBy = "charges", fetch = FetchType.LAZY, orphanRemoval = true, cascade = [CascadeType.ALL])
-        val charges: MutableSet<Charge> = mutableSetOf(),
+        @OneToMany(mappedBy = "report", fetch = FetchType.LAZY, orphanRemoval = true, cascade = [CascadeType.ALL])
+        var charges: MutableSet<Charge> = mutableSetOf(),
 
-        @OneToMany(mappedBy = "payments", fetch = FetchType.LAZY, orphanRemoval = true, cascade = [CascadeType.ALL])
-        val payments: MutableSet<Payment> = mutableSetOf()
+        @OneToMany(mappedBy = "report", fetch = FetchType.LAZY, orphanRemoval = true, cascade = [CascadeType.ALL])
+        var payments: MutableSet<Payment> = mutableSetOf()
 
 )
