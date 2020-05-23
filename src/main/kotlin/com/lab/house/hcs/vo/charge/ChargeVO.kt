@@ -1,6 +1,8 @@
 package com.lab.house.hcs.vo.charge
 
 import com.lab.house.hcs.entities.*
+import com.lab.house.hcs.vo.house.HouseVO
+import com.lab.house.hcs.vo.payment.PaymentVO
 
 data class ChargeVO(
         val id: Long? = null,
@@ -10,8 +12,8 @@ data class ChargeVO(
         val year: Int? = 0,
         val month: Month = Month.JANUARY,
         val isPayment: Boolean = false,
-        val house: House? = null,
-        val payment: MutableSet<Payment> = mutableSetOf(),
+        val house: HouseVO? = null,
+        val payment: List<PaymentVO> = listOf(),
         val saldo: Saldo? = null
 ) {
 
@@ -25,8 +27,8 @@ data class ChargeVO(
                         charge.year,
                         charge.month,
                         charge.isPayment,
-                        charge.house,
-                        charge.payment,
+                        charge.house?.let { HouseVO.fromData(it) },
+                        charge.payment.map { PaymentVO.fromData(it) },
                         charge.saldo
                 )
     }
