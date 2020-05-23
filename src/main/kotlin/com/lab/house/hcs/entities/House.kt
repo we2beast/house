@@ -27,8 +27,7 @@ data class House(
         @JoinColumn(name = "contract_id")
         var contract: Contract? = null,
 
-        @ManyToOne(fetch = FetchType.LAZY, optional = false)
-        @JoinColumn(name = "charge_id", nullable = false)
-        var charge: Charge? = null
+        @OneToMany(mappedBy = "house", fetch = FetchType.LAZY, orphanRemoval = true, cascade = [CascadeType.ALL])
+        var charge: MutableSet<Charge> = mutableSetOf()
 
 )

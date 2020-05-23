@@ -32,11 +32,13 @@ class HouseServiceImpl : HouseService {
         return houseRepository.findAll().map(::toHouseVO)
     }
 
+    @Throws(EntityNotFoundException::class)
     override fun createHouse(houseCreateRq: HouseCreateRq): HouseVO {
-        contractRepository.findByIdOrNull(houseCreateRq.contract) ?: throw EntityNotFoundException("Contract with ${houseCreateRq.contract} not found.")
+        val contract = contractRepository.findByIdOrNull(houseCreateRq.contract) ?: throw EntityNotFoundException("Contract with ${houseCreateRq.contract} not found.")
 
         val id = houseRepository.save(House().apply {
             houseNumber = houseCreateRq.houseNumber
+            this.contract = contract
         }).id ?: throw IllegalArgumentException("Bad id returned.")
 
         log.debug("Created entity $id")
@@ -45,8 +47,11 @@ class HouseServiceImpl : HouseService {
 
     @Throws(EntityNotFoundException::class)
     override fun updateHouse(id: String, houseCreateRq: HouseCreateRq): HouseVO {
+        val contract = contractRepository.findByIdOrNull(houseCreateRq.contract) ?: throw EntityNotFoundException("Contract with ${houseCreateRq.contract} not found.")
+
         houseRepository.save(houseRepository.findById(id.toLong()).get().apply {
             houseNumber = houseCreateRq.houseNumber
+            this.contract = contract
         }).id ?: throw IllegalArgumentException("Bad id returned.")
 
         log.debug("Updated entity $id")

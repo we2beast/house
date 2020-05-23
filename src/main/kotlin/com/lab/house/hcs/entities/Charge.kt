@@ -33,8 +33,9 @@ data class Charge(
         @Column(name = "month", nullable = false)
         var month: Month = Month.JANUARY,
 
-        @OneToMany(mappedBy = "charge", fetch = FetchType.LAZY, orphanRemoval = true, cascade = [CascadeType.ALL])
-        var house: MutableSet<House> = mutableSetOf(),
+        @ManyToOne(fetch = FetchType.LAZY, optional = false)
+        @JoinColumn(name = "house_id", nullable = false)
+        var house: House? = null,
 
         @OneToMany(mappedBy = "charge", fetch = FetchType.LAZY, orphanRemoval = true, cascade = [CascadeType.ALL])
         var payment: MutableSet<Payment> = mutableSetOf(),

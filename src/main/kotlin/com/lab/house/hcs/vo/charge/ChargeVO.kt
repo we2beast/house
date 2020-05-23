@@ -10,7 +10,7 @@ data class ChargeVO(
         val year: Int? = 0,
         val month: Month = Month.JANUARY,
         val isPayment: Boolean = false,
-        val house: MutableSet<House> = mutableSetOf(),
+        val house: House? = null,
         val payment: MutableSet<Payment> = mutableSetOf(),
         val saldo: Saldo? = null
 ) {

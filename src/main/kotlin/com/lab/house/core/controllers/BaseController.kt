@@ -14,7 +14,7 @@ open class BaseController {
                 block()
             } catch (e: EntityNotFoundException) {
                 log.error("$e")
-                throw ResponseStatusException(HttpStatus.NOT_FOUND, e.message, e)
+                throw ResponseStatusException(HttpStatus.NOT_FOUND, "Entity not found", e)
             } catch (e: Exception) {
                 log.error("$e")
                 throw ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error occurred processing the request", e)
