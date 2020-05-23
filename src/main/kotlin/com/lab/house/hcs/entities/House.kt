@@ -24,6 +24,10 @@ data class House(
         var houseNumber: Int? = 0,
 
         @OneToOne(mappedBy = "house", fetch = FetchType.LAZY, orphanRemoval = true, cascade = [CascadeType.ALL])
-        var contract: Contract? = null
+        var contract: Contract? = null,
+
+        @ManyToOne(fetch = FetchType.LAZY, optional = false)
+        @JoinColumn(name = "charge_id", nullable = false)
+        var charge: Charge
 
 )

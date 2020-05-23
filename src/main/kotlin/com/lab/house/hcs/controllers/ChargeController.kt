@@ -3,8 +3,8 @@ package com.lab.house.hcs.controllers
 import com.lab.house.core.controllers.BaseController
 import com.lab.house.core.exceptions.EntityNotFoundException
 import com.lab.house.hcs.services.ChargeService
-import com.lab.house.hcs.vo.hcs.HcsCreateRq
-import com.lab.house.hcs.vo.hcs.HcsVO
+import com.lab.house.hcs.vo.charge.ChargeCreateRq
+import com.lab.house.hcs.vo.charge.ChargeVO
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -19,7 +19,7 @@ class ChargeController : BaseController() {
     lateinit var chargeService: ChargeService
 
     @GetMapping("/charges")
-    fun getCharges(): ResponseEntity<List<HcsVO>> = processServiceExceptions {
+    fun getCharges(): ResponseEntity<List<ChargeVO>> = processServiceExceptions {
         try {
             ResponseEntity.ok(chargeService.getCharges())
         } catch (ex: EntityNotFoundException) {
@@ -28,7 +28,7 @@ class ChargeController : BaseController() {
     }
 
     @GetMapping("/charge/{id}")
-    fun getChargeById(@PathVariable id: String): ResponseEntity<HcsVO> = processServiceExceptions {
+    fun getChargeById(@PathVariable id: String): ResponseEntity<ChargeVO> = processServiceExceptions {
         try {
             ResponseEntity.ok(chargeService.getChargeById(id))
         } catch (ex: EntityNotFoundException) {
@@ -36,13 +36,13 @@ class ChargeController : BaseController() {
         }
     }
 
-    @PostMapping("/charge")
-    fun createCharge(@RequestBody chargeCreateRq: HcsCreateRq): ResponseEntity<HcsVO> = processServiceExceptions {
-        ResponseEntity.ok(chargeService.createCharge(chargeCreateRq))
+    @PostMapping("/charge/{houseId}")
+    fun createCharge(@PathVariable houseId: String, @RequestBody chargeCreateRq: ChargeCreateRq): ResponseEntity<ChargeVO> = processServiceExceptions {
+        ResponseEntity.ok(chargeService.createCharge(houseId, chargeCreateRq))
     }
 
     @PutMapping("/charge/{id}")
-    fun updateCharge(@PathVariable id: String, @RequestBody chargeUpdateRq: HcsCreateRq): ResponseEntity<HcsVO> = processServiceExceptions {
+    fun updateCharge(@PathVariable id: String, @RequestBody chargeUpdateRq: ChargeCreateRq): ResponseEntity<ChargeVO> = processServiceExceptions {
         ResponseEntity.ok(chargeService.updateCharge(id, chargeUpdateRq))
     }
 

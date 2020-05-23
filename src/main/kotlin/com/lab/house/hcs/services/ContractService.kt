@@ -3,8 +3,6 @@ package com.lab.house.hcs.services
 import com.lab.house.core.exceptions.EntityNotFoundException
 import com.lab.house.hcs.vo.contract.ContractCreateRq
 import com.lab.house.hcs.vo.contract.ContractVO
-import com.lab.house.hcs.vo.hcs.HcsCreateRq
-import com.lab.house.hcs.vo.hcs.HcsVO
 
 interface ContractService {
 

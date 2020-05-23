@@ -26,12 +26,20 @@ data class Charge(
         @Column(name = "year", nullable = false)
         var year: Int? = 1970,
 
+        @Column(name = "is_payment", nullable = false)
+        var isPayment: Boolean = false,
+
         @Enumerated(EnumType.STRING)
         @Column(name = "month", nullable = false)
         var month: Month = Month.JANUARY,
 
-        @ManyToOne(fetch = FetchType.LAZY, optional = false)
-        @JoinColumn(name = "report_id", nullable = false)
-        val report: Report
+        @OneToMany(mappedBy = "charge", fetch = FetchType.LAZY, orphanRemoval = true, cascade = [CascadeType.ALL])
+        var house: MutableSet<House> = mutableSetOf(),
+
+        @OneToMany(mappedBy = "charge", fetch = FetchType.LAZY, orphanRemoval = true, cascade = [CascadeType.ALL])
+        var payment: MutableSet<Payment> = mutableSetOf(),
+
+        @OneToOne(mappedBy = "charge", fetch = FetchType.LAZY, orphanRemoval = true, cascade = [CascadeType.ALL])
+        var saldo: Saldo? = null
 
 )

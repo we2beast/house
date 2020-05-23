@@ -31,7 +31,7 @@ data class Payment(
         var month: Month = Month.JANUARY,
 
         @ManyToOne(fetch = FetchType.LAZY, optional = false)
-        @JoinColumn(name = "report_id", nullable = false)
-        val report: Report
+        @JoinColumn(name = "charge_id", nullable = false)
+        var charge: Charge
 
 )

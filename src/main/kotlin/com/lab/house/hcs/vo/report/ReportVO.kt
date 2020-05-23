@@ -20,15 +20,15 @@ data class ReportVO(
 ) {
 
         companion object {
-                fun fromData(report: Report): ReportVO =
-                        ReportVO(
-                                report.id,
-                                report.createdAt.toString(),
-                                report.updatedAt.toString(),
-                                report.saldos,
-                                report.charges,
-                                report.payments
-                        )
+//                fun fromData(report: Report): ReportVO =
+//                        ReportVO(
+//                                report.id,
+//                                report.createdAt.toString(),
+//                                report.updatedAt.toString(),
+//                                report.saldos,
+//                                report.charges,
+//                                report.payments
+//                        )
         }
 
 }
