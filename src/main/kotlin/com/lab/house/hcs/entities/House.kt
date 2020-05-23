@@ -20,10 +20,11 @@ data class House(
         @UpdateTimestamp
         var updatedAt: Timestamp = Timestamp(0),
 
-        @Column(name = "house_number")
-        var houseNumber: Int? = 0,
+        @Column(name = "house_number", nullable = false)
+        var houseNumber: Int = 0,
 
-        @OneToOne(mappedBy = "house", fetch = FetchType.LAZY, orphanRemoval = true, cascade = [CascadeType.ALL])
+        @OneToOne(fetch = FetchType.LAZY)
+        @JoinColumn(name = "contract_id")
         var contract: Contract? = null,
 
         @ManyToOne(fetch = FetchType.LAZY, optional = false)

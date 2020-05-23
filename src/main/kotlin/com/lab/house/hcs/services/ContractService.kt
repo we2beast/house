@@ -12,13 +12,11 @@ interface ContractService {
     @Throws(EntityNotFoundException::class)
     fun getContracts(): List<ContractVO>
 
-    @Throws(EntityNotFoundException::class)
     fun createContract(contractCreateRq: ContractCreateRq): ContractVO
 
     @Throws(EntityNotFoundException::class)
     fun updateContract(id: String, contractCreateRq: ContractCreateRq): ContractVO
 
-    @Throws(EntityNotFoundException::class)
     fun delete(id: String)
 
 }

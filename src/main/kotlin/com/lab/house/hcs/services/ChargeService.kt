@@ -18,7 +18,6 @@ interface ChargeService {
     @Throws(EntityNotFoundException::class)
     fun updateCharge(id: String, chargeUpdateRq: ChargeCreateRq): ChargeVO
 
-    @Throws(EntityNotFoundException::class)
     fun delete(id: String)
 
 }

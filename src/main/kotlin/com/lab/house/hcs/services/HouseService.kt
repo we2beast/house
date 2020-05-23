@@ -12,13 +12,11 @@ interface HouseService {
     @Throws(EntityNotFoundException::class)
     fun getHouses(): List<HouseVO>
 
-    @Throws(EntityNotFoundException::class)
     fun createHouse(houseCreateRq: HouseCreateRq): HouseVO
 
     @Throws(EntityNotFoundException::class)
     fun updateHouse(id: String, houseCreateRq: HouseCreateRq): HouseVO
 
-    @Throws(EntityNotFoundException::class)
     fun delete(id: String)
 
 }
