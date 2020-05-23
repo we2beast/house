@@ -13,4 +13,4 @@
 ```http://localhost:8080/swagger-ui.html```
 
 ## Схема базы данных
-![alt text](database.png "Схема базы данных")
+![alt text](databaseNew.png "Схема базы данных")
