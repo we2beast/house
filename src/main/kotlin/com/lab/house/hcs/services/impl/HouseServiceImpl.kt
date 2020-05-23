@@ -2,7 +2,6 @@ package com.lab.house.hcs.services.impl
 
 import com.lab.house.core.exceptions.AlreadyExistsException
 import com.lab.house.core.exceptions.EntityNotFoundException
-import com.lab.house.hcs.entities.Contract
 import com.lab.house.hcs.entities.House
 import com.lab.house.hcs.repositories.ContractRepository
 import com.lab.house.hcs.repositories.HouseRepository
@@ -11,14 +10,12 @@ import com.lab.house.hcs.vo.house.HouseCreateRq
 import com.lab.house.hcs.vo.house.HouseVO
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 
 @Service
 class HouseServiceImpl : HouseService {
 
-    private val log = LoggerFactory.getLogger(ContractServiceImpl::class.java)
+    private val log = LoggerFactory.getLogger(HouseServiceImpl::class.java)
 
     @Autowired
     lateinit var houseRepository: HouseRepository
