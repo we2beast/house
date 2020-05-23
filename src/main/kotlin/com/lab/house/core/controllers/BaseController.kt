@@ -1,5 +1,6 @@
 package com.lab.house.core.controllers
 
+import com.lab.house.core.exceptions.AlreadyExistsException
 import com.lab.house.core.exceptions.EntityNotFoundException
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
@@ -15,6 +16,9 @@ open class BaseController {
             } catch (e: EntityNotFoundException) {
                 log.error("$e")
                 throw ResponseStatusException(HttpStatus.NOT_FOUND, "Entity not found", e)
+            } catch (e: AlreadyExistsException) {
+                log.error("$e")
+                throw ResponseStatusException(HttpStatus.BAD_REQUEST, "Entity already exists", e)
             } catch (e: Exception) {
                 log.error("$e")
                 throw ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error occurred processing the request", e)

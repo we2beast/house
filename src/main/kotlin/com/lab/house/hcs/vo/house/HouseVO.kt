@@ -1,15 +1,14 @@
 package com.lab.house.hcs.vo.house
 
-import com.lab.house.hcs.entities.Contract
 import com.lab.house.hcs.entities.House
-import java.sql.Timestamp
+import com.lab.house.hcs.vo.contract.ContractVO
 
 data class HouseVO(
         val id: Long? = null,
         val createdAt: String,
         val updatedAt: String,
         val houseNumber: Int? = 0,
-        val contract: Contract? = null
+        val contract: ContractVO? = null
 ) {
 
     companion object {
@@ -19,7 +18,7 @@ data class HouseVO(
                         house.createdAt.toString(),
                         house.updatedAt.toString(),
                         house.houseNumber,
-                        house.contract
+                        house.contract?.let { ContractVO.fromData(it) }
                 )
     }
 

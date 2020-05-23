@@ -45,10 +45,5 @@ class HouseController : BaseController() {
     fun updateHouse(@PathVariable id: String, @RequestBody houseUpdateRq: HouseCreateRq): ResponseEntity<HouseVO> = processServiceExceptions {
         ResponseEntity.ok(houseService.updateHouse(id, houseUpdateRq))
     }
-
-    @DeleteMapping("/house/{id}")
-    fun deleteHouse(@PathVariable id: String): ResponseEntity<*> = processServiceExceptions {
-        ResponseEntity.ok(houseService.delete(id))
-    }
     
 }

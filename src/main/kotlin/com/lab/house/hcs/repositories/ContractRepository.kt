@@ -5,4 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface ContractRepository : JpaRepository<Contract, Long>
+interface ContractRepository : JpaRepository<Contract, Long> {
+
+    fun findFirstByBillNumber(billNumber: Int): Contract?
+
+}
