@@ -21,7 +21,7 @@ data class House(
         var updatedAt: Timestamp = Timestamp(0),
 
         @Column(name = "house_number", nullable = false)
-        var houseNumber: Int = 0,
+        var houseNumber: Int? = 0,
 
         @OneToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "contract_id")
@@ -29,6 +29,6 @@ data class House(
 
         @ManyToOne(fetch = FetchType.LAZY, optional = false)
         @JoinColumn(name = "charge_id", nullable = false)
-        var charge: Charge
+        var charge: Charge? = null
 
 )
