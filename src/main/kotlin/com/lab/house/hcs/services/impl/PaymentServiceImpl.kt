@@ -56,15 +56,6 @@ class PaymentServiceImpl : PaymentService {
         if (paymentCreateRq.value != null && paymentCreateRq.value <= 0)
             throw PaymentException("The value is empty or less than 0.")
 
-        // Оплата выставленного счета. Подсчет остального ниже
-        val paymentId = paymentRepository.save(Payment().apply {
-            value = paymentCreateRq.value
-            year = calendar.get(Calendar.YEAR)
-            month = Month.fromInt(currentMonth)
-            this.charge = charge
-        }).id ?: throw IllegalArgumentException("Bad payment id returned.")
-        log.debug("Updated entity $paymentId")
-
         // Получаем предыдущие даты для получения сальдо
         val previousMonth = Month.fromInt(currentMonth - 1)
         val previousYear = if (previousMonth.ordinal != 0) {
@@ -81,17 +72,32 @@ class PaymentServiceImpl : PaymentService {
         val valueWithSaldo = if (saldo == null) {
             charge.value
         } else {
+            // ОБРАТИТЕ ВНИМАНИЕ!!!
+            // Положительный сальдо - это долг
+            // Отрицательный сальдо - это переплата в предыдущем месяце
             charge.value.plus(saldo.value)
         }
 
-        // Обновляем поле completePayment выставленного счета, если оплата больше выставленного счета и сальдо
-        if (paymentCreateRq.value!! >= valueWithSaldo) {
+        // Получение итого количества поступивших денег по выставленному счету
+        val valueAllPayments = paymentRepository.findAllByCharge(charge).sumByDouble { it.value!! }
+
+        // Обновляем поле completePayment выставленного счета, если ВСЕ оплаты больше выставленного счета + сальдо
+        if (paymentCreateRq.value!! + valueAllPayments >= valueWithSaldo) {
             val chargeId = chargeRepository.save(charge.apply {
                 completePayment = true
             }).id ?: throw IllegalArgumentException("Bad charge id returned.")
 
             log.debug("Updated charge entity with $chargeId")
         }
+
+        // Оплата выставленного счета. Подсчет остального ниже
+        val paymentId = paymentRepository.save(Payment().apply {
+            value = paymentCreateRq.value
+            year = calendar.get(Calendar.YEAR)
+            month = Month.fromInt(currentMonth)
+            this.charge = charge
+        }).id ?: throw IllegalArgumentException("Bad payment id returned.")
+        log.debug("Updated entity $paymentId")
 
         return getPaymentById(paymentId.toString())
     }
