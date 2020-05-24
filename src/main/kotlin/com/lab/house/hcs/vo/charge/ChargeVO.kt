@@ -14,7 +14,7 @@ data class ChargeVO(
         val isPayment: Boolean = false,
         val house: HouseVO? = null,
         val payment: List<PaymentVO> = listOf(),
-        val saldo: Saldo? = null
+        val valueWithSaldo: Double? = null
 ) {
 
     companion object {
@@ -29,7 +29,7 @@ data class ChargeVO(
                         charge.isPayment,
                         charge.house?.let { HouseVO.fromData(it) },
                         charge.payment.map { PaymentVO.fromData(it) },
-                        charge.saldo
+                        null
                 )
     }
 
