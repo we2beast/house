@@ -30,8 +30,8 @@ data class Saldo(
         @Column(name = "month", nullable = false)
         var month: Month = Month.JANUARY,
 
-        @OneToOne(fetch = FetchType.LAZY)
-        @JoinColumn(name = "charge_id")
+        @ManyToOne(fetch = FetchType.LAZY, optional = false)
+        @JoinColumn(name = "charge_id", nullable = false)
         var charge: Charge? = null
 
 )

@@ -1,5 +1,6 @@
 package com.lab.house.hcs.services.impl
 
+import com.lab.house.core.Utils
 import com.lab.house.core.exceptions.EntityNotFoundException
 import com.lab.house.core.exceptions.PaymentException
 import com.lab.house.hcs.entities.Month
@@ -19,7 +20,7 @@ import java.util.*
 @Service
 class PaymentServiceImpl : PaymentService {
 
-    private val log = LoggerFactory.getLogger(ChargeServiceImpl::class.java)
+    private val log = LoggerFactory.getLogger(PaymentServiceImpl::class.java)
 
     @Autowired
     lateinit var paymentRepository: PaymentRepository
@@ -57,12 +58,9 @@ class PaymentServiceImpl : PaymentService {
             throw PaymentException("The value is empty or less than 0.")
 
         // Получаем предыдущие даты для получения сальдо
-        val previousMonth = Month.fromInt(currentMonth - 1)
-        val previousYear = if (previousMonth.ordinal != 0) {
-            currentYear
-        } else {
-            currentYear - 1
-        }
+        val previousDate = Utils.getPreviousDate(currentMonth, currentYear)
+        val previousMonth = previousDate.first
+        val previousYear = previousDate.second
 
         // Получаем сальдо предыдущего месяца для использования в оплате
         val saldo = saldoRepository.findFirstByChargeAndMonthAndYear(charge, previousMonth, previousYear)

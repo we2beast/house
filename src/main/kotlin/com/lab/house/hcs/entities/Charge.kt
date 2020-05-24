@@ -40,7 +40,7 @@ data class Charge(
         @OneToMany(mappedBy = "charge", fetch = FetchType.LAZY, orphanRemoval = true, cascade = [CascadeType.ALL])
         var payment: MutableSet<Payment> = mutableSetOf(),
 
-        @OneToOne(mappedBy = "charge", fetch = FetchType.LAZY, orphanRemoval = true, cascade = [CascadeType.ALL])
-        var saldo: Saldo? = null
+        @OneToMany(mappedBy = "charge", fetch = FetchType.LAZY, orphanRemoval = true, cascade = [CascadeType.ALL])
+        var saldo: MutableSet<Saldo>? = null
 
 )

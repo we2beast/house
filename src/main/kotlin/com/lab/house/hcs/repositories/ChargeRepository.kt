@@ -13,5 +13,6 @@ interface ChargeRepository : JpaRepository<Charge, Long> {
     fun findFirstByHouse(house: House): Charge?
     fun findFirstByIdAndCompletePaymentIsFalse(id: Long): Charge?
     fun findFirstByHouseAndMonthAndYear(house: House, month: Month, year: Int): Charge?
+    fun findAllByMonthAndYear(month: Month, year: Int): List<Charge>
 
 }
