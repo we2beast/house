@@ -40,15 +40,5 @@ class PaymentController : BaseController() {
     fun createPayment(@PathVariable chargeId: String, @RequestBody paymentCreateRq: PaymentCreateRq): ResponseEntity<PaymentVO> = processServiceExceptions {
         ResponseEntity.ok(paymentService.createPayment(chargeId, paymentCreateRq))
     }
-
-    @PutMapping("/payment/{id}")
-    fun updatePayment(@PathVariable id: String, @RequestBody paymentUpdateRq: PaymentCreateRq): ResponseEntity<PaymentVO> = processServiceExceptions {
-        ResponseEntity.ok(paymentService.updatePayment(id, paymentUpdateRq))
-    }
-
-    @DeleteMapping("/payment/{id}")
-    fun deletePayment(@PathVariable id: String): ResponseEntity<*> = processServiceExceptions {
-        ResponseEntity.ok(paymentService.delete(id))
-    }
     
 }

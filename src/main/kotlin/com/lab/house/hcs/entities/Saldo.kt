@@ -21,10 +21,10 @@ data class Saldo(
         var updatedAt: Timestamp = Timestamp(0),
 
         @Column(name = "value", nullable = false)
-        var value: Double? = 0.0,
+        var value: Double = 0.0,
 
         @Column(name = "year", nullable = false)
-        var year: Int? = 1970,
+        var year: Int = 1970,
 
         @Enumerated(EnumType.STRING)
         @Column(name = "month", nullable = false)

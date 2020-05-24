@@ -21,13 +21,13 @@ data class Charge(
         var updatedAt: Timestamp = Timestamp(0),
 
         @Column(name = "value", nullable = false)
-        var value: Double? = 0.0,
+        var value: Double = 0.0,
 
         @Column(name = "year", nullable = false)
-        var year: Int? = 1970,
+        var year: Int = 1970,
 
         @Column(name = "is_payment", nullable = false)
-        var isPayment: Boolean = false,
+        var completePayment: Boolean = false,
 
         @Enumerated(EnumType.STRING)
         @Column(name = "month", nullable = false)

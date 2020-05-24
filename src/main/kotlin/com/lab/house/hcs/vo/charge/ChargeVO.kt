@@ -11,7 +11,7 @@ data class ChargeVO(
         val value: Double? = 0.0,
         val year: Int? = 0,
         val month: Month = Month.JANUARY,
-        val isPayment: Boolean = false,
+        val completePayment: Boolean = false,
         val house: HouseVO? = null,
         val payment: List<PaymentVO> = listOf(),
         val valueWithSaldo: Double? = null
@@ -26,7 +26,7 @@ data class ChargeVO(
                         charge.value,
                         charge.year,
                         charge.month,
-                        charge.isPayment,
+                        charge.completePayment,
                         charge.house?.let { HouseVO.fromData(it) },
                         charge.payment.map { PaymentVO.fromData(it) },
                         null

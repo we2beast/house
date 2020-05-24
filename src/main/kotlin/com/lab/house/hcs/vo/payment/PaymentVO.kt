@@ -8,8 +8,7 @@ data class PaymentVO(
         val updatedAt: String,
         val value: Double? = 0.0,
         val year: Int? = 0,
-        val month: Month = Month.JANUARY,
-        val charge: Charge
+        val month: Month? = Month.JANUARY
 ) {
 
     companion object {
@@ -20,8 +19,7 @@ data class PaymentVO(
                         payment.updatedAt.toString(),
                         payment.value,
                         payment.year,
-                        payment.month,
-                        payment.charge
+                        payment.month
                 )
     }
 

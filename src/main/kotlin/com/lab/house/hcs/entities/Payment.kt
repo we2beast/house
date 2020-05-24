@@ -28,10 +28,10 @@ data class Payment(
 
         @Enumerated(EnumType.STRING)
         @Column(name = "month", nullable = false)
-        var month: Month = Month.JANUARY,
+        var month: Month? = Month.JANUARY,
 
         @ManyToOne(fetch = FetchType.LAZY, optional = false)
         @JoinColumn(name = "charge_id", nullable = false)
-        var charge: Charge
+        var charge: Charge? = null
 
 )
