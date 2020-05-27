@@ -15,6 +15,6 @@ enum class Month(val value: Int) {
     DECEMBER(11);
 
     companion object {
-        fun fromInt(value: Int) = Month.values().first { it.value == value }
+        fun fromInt(value: Int) = values().first { it.value == value }
     }
 }
