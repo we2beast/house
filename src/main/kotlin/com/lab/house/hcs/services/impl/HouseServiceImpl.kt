@@ -34,8 +34,8 @@ class HouseServiceImpl : HouseService {
     @Throws(EntityNotFoundException::class, AlreadyExistsException::class)
     override fun createHouse(houseCreateRq: HouseCreateRq): HouseVO {
         val contract = contractRepository.findFirstByBillNumber(houseCreateRq.contract) ?: throw EntityNotFoundException("Contract with ${houseCreateRq.contract} not found.")
-        if (houseRepository.findFirstByHouseNumber(houseCreateRq.houseNumber) != null) throw AlreadyExistsException("House with ${houseCreateRq.houseNumber} not found.")
-        if (houseRepository.findFirstByContract(contract) != null) throw AlreadyExistsException("Contract with ${houseCreateRq.contract} not found.")
+        if (houseRepository.findFirstByHouseNumber(houseCreateRq.houseNumber) != null) throw AlreadyExistsException("House with ${houseCreateRq.houseNumber} already exist.")
+        if (houseRepository.findFirstByContract(contract) != null) throw AlreadyExistsException("Contract with ${houseCreateRq.contract} already exist.")
 
         val id = houseRepository.save(House().apply {
             houseNumber = houseCreateRq.houseNumber
